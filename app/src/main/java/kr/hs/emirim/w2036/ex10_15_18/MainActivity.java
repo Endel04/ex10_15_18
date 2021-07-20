@@ -11,8 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    EditText edit1 = findViewById(R.id.edit1);
-    EditText edit2 = findViewById(R.id.edit2);
+    EditText edit1, edit2;
     RadioGroup rg;
 
     @Override
@@ -24,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         edit1 = findViewById(R.id.edit1);
         edit2 = findViewById(R.id.edit2);
         rg = findViewById(R.id.rg);
-        Button btnPlus = findViewById(R.id.btn_plus);
+
+        Button btnPlus = findViewById(R.id.btn_calc);
 
         btnPlus.setOnClickListener(btnListener);
     }
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
             intent.putExtra("num1", Integer.parseInt(edit1.getText().toString()));
             intent.putExtra("num2", Integer.parseInt(edit2.getText().toString()));
+            intent.putExtra("op", op);
             startActivityForResult(intent, 0);
         }
     };

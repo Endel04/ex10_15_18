@@ -6,20 +6,38 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 
 public class SecondActivity extends AppCompatActivity {
-    int sum;
-
+    int result;
+    RadioGroup rg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        rg = findViewById(R.id.rg);
+
         Intent intent = getIntent();
         int num1 = intent.getIntExtra("num1", 0);
         int num2 = intent.getIntExtra("num3", 0);
-        sum = num1 + num2;
+
+        char op = getIntent().getCharExtra("op", '0');
+        switch (op) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                result = num1 / num2;
+                break;
+        } //end of switch
 
         Button btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(btnListener);
@@ -29,7 +47,7 @@ public class SecondActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-            mainIntent.putExtra("sum", sum);
+            mainIntent.putExtra("result", result);
             setResult(RESULT_OK);
             finish();
         }
